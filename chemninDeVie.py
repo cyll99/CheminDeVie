@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-# url = 'https://www.cheminsdevie.info/livre/deuteronome/'
+book = input("Enter the book you want to download: ")
 
 for i in range(1, 10):
-    url = 'https://www.cheminsdevie.info/livre/deuteronome/page/' + str(i) + '/'
+    url = f'https://www.cheminsdevie.info/livre/{book}/page/' + str(i) + '/'
 
 
     # Send a GET request to the URL
@@ -30,7 +30,7 @@ for i in range(1, 10):
                 mp3_links = linked_soup.find_all('source', src=lambda src: src.endswith('.mp3'))
 
                
-                directory = 'audio_files\\deuteronome'
+                directory = f'audio_files\\{book}'
                 # Create a directory to store the downloaded files
                 if not os.path.exists(directory):
                     os.makedirs(directory)
