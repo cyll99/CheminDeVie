@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
+import tqdm
+
 book = input("Enter the book you want to download: ")
 
 for i in range(1, 10):
@@ -48,10 +50,17 @@ for i in range(1, 10):
 
 
                 try:
+                    total_size = int(response.headers.get('content-length', 0))
+                    block_size = 1024  # 1 KB
+                    progress_bar = tqdm(total=total_size, unit='B', unit_scale=True, ncols=80)
+
                     with open(file_path, 'wb') as file:
                             print(f"Downloadind {file_name}....")
                             response = requests.get(file_url)
-                            file.write(response.content)
+                            for data in response.iter_content(block_size):
+                                progress_bar.update(len(data))
+                                file.write(data)
+                                file.write(response.content)
                             
                             print(f'{file_name} downloaded')
                 except:
