@@ -20,7 +20,10 @@ with open(temp_html_file, 'w', encoding='utf-8') as file:
 
 # 5. Utiliser PDFKit pour convertir le fichier HTML en PDF
 output_pdf = 'output.pdf'  # Nom du fichier PDF de sortie
-pdfkit.from_file(temp_html_file, output_pdf)
+try:
+    pdfkit.from_file(temp_html_file, output_pdf)
+except:
+    print()
 
 # 6. Supprimer le fichier HTML temporaire
 import os

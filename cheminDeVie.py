@@ -2,6 +2,42 @@ import getpass
 import requests
 from bs4 import BeautifulSoup
 import os
+import pdfkit
+
+""""
+Converts each pages into a pdf document
+"""
+def pdf_convert(url):
+
+    # 1. Retrieve the HTML content of the web page
+    url = 'https://www.example.com'  # Replace with the URL of the web page you want to download
+    response = requests.get(url)
+    html_content = response.content
+
+    # 2. Use BeautifulSoup to parse the HTML content
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    # 3. Optional: Perform modifications on the HTML content if needed
+    # For example, you can remove certain unwanted elements or make layout modifications
+
+    # 4. Save the modified HTML content to a temporary file
+    temp_html_file = 'temp.html'
+    with open(temp_html_file, 'w', encoding='utf-8') as file:
+        file.write(str(soup))
+
+    # 5. Use PDFKit to convert the HTML file to PDF
+    output_pdf = url.split('/')[-1] # Output PDF file name
+
+    try:
+        pdfkit.from_file(temp_html_file, output_pdf)
+    except:
+        print()
+    # 6. Remove the temporary HTML file
+    import os
+    os.remove(temp_html_file)
+
+    print('Download completed. The PDF file has been saved as', output_pdf)
+
 
 while True:
     print("Press q to exit")
