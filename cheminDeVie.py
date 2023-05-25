@@ -6,7 +6,7 @@ import os
 while True:
     print("Press q to exit")
     book = input("Enter the book you want to download: ")
-    
+
     if book.lower() == 'q':
         break
     current_user = getpass.getuser() #get current user
@@ -65,4 +65,4 @@ while True:
                     except:
                         print("Somethings went wrong. File not downloaded")
         except:
-            print("Page could not be loaded...")
+            print("Page could not be loaded...") 
