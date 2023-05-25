@@ -8,10 +8,17 @@ import pdfkit
 Converts each pages into a pdf document
 """
 def pdf_convert(url, directory):
+
    
-    file_name = url.split('/')[-2]
+    file_name = url.split('/')[-2] + ".pdf"
+
     file_path = os.path.join(directory, file_name)
    
+           # Check if the file already exists
+    if os.path.exists(file_path):
+        print(f'Skipped {file_name} - File already exists')
+        return
+    
     # 1. Retrieve the HTML content of the web page
     response = requests.get(url)
     html_content = response.content
@@ -34,10 +41,9 @@ def pdf_convert(url, directory):
     except:
         print()
     # 6. Remove the temporary HTML file
-    import os
     os.remove(temp_html_file)
 
-    print('Download completed. The PDF file has been saved as', file_path)
+    print('Download completed. The PDF file has been saved as', file_name)
 
 
 """"
