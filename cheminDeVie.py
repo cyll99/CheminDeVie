@@ -76,7 +76,7 @@ def download_audio(file_url, directory):
 def main():
     while True:
         print("Press q to exit")
-        book = input("Enter the book you want to download: ")
+        book = input("Enter the book you want to download (jude or 1-samuel): ")
 
         if book.lower() == 'q':
             break
